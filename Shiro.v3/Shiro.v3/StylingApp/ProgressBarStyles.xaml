@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="HardnessLevelProgressBarStyle" TargetType="{x:Type ProgressBar}">
+        <Style.Resources>
+            <Color x:Key="GreenBlockBrush">DarkSeaGreen</Color>
+            <Color x:Key="YellowGreenBlockBrush">YellowGreen</Color>
+            <Color x:Key="RedBlockBrush">DarkRed</Color>
+        </Style.Resources>
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid >
+                        <Rectangle Name="PART_Track" Stroke="#888888" StrokeThickness="0">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Offset="0" Color="{DynamicResource RedBlockBrush}"/>
+                                    <GradientStop Offset="0.3" Color="{DynamicResource YellowGreenBlockBrush}"/>
+                                    <GradientStop Offset="0.7" Color="{DynamicResource YellowGreenBlockBrush}"/>
+                                    <GradientStop Offset="1" Color="{DynamicResource GreenBlockBrush}"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <DockPanel>
+                            <Rectangle Name="PART_Indicator" />
+                            <Rectangle Name="Mask" Fill="{TemplateBinding Background}"/>
+                        </DockPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JlptLvlProgressBarStyle" TargetType="ProgressBar">
+        <Style.Resources>
+            <SolidColorBrush x:Key="LightGreenBlockBrush" Color="LawnGreen" />
+            <SolidColorBrush x:Key="GreenBlockBrush" Color="DarkSeaGreen" />
+            <SolidColorBrush x:Key="BlueBlockBrush" Color="DodgerBlue" />
+            <SolidColorBrush x:Key="RedBlockBrush" Color="Red" />
+            <SolidColorBrush x:Key="DarkRedBlockBrush" Color="DarkRed" />
+        </Style.Resources>
+        <Setter Property="Minimum" Value="0" />
+        <Setter Property="Maximum" Value="5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid Margin="0" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" x:Name="g0" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10" Visibility="Collapsed"/>
+                        <TextBlock Grid.Column="0" x:Name="g0T" Text="Never Seen" HorizontalAlignment="Center" Foreground="WhiteSmoke" Margin="5,2" Visibility="Collapsed"/>
+                        <Rectangle Grid.Column="1" x:Name="g1" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10"/>
+                        <TextBlock Grid.Column="1" x:Name="g1T" Text="1" HorizontalAlignment="Center" Foreground="WhiteSmoke" Visibility="Collapsed"/>
+                        <Rectangle Grid.Column="2" x:Name="g2" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10"/>
+                        <TextBlock Grid.Column="2" x:Name="g2T" Text="2" HorizontalAlignment="Center" Foreground="WhiteSmoke" Visibility="Collapsed"/>
+                        <Rectangle Grid.Column="3" x:Name="g3" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10"/>
+                        <TextBlock Grid.Column="3" x:Name="g3T" Text="3" HorizontalAlignment="Center" Foreground="WhiteSmoke" Visibility="Collapsed"/>
+                        <Rectangle Grid.Column="4" x:Name="g4" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10"/>
+                        <TextBlock Grid.Column="4" x:Name="g4T" Text="4" HorizontalAlignment="Center" Foreground="WhiteSmoke" Visibility="Collapsed"/>
+                        <Rectangle Grid.Column="5" x:Name="g5" Margin="2,0" VerticalAlignment="Stretch" MinWidth="10"/>
+                        <TextBlock Grid.Column="5" x:Name="g5T" Text="5" HorizontalAlignment="Center" Foreground="WhiteSmoke" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Value" Value="0">
+                            <Setter Property="Visibility" TargetName="g0" Value="Visible" />
+                            <Setter Property="Visibility" TargetName="g0T" Value="Visible" />
+                            <Setter Property="Fill" TargetName="g0" Value="{DynamicResource RedBlockBrush}" />
+                        </Trigger>
+                        <Trigger Property="Value" Value="1">
+                            <Setter Property="Fill" TargetName="g1" Value="{DynamicResource DarkRedBlockBrush}" />
+                            <Setter Property="Visibility" TargetName="g1T" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Value" Value="2">
+                            <Setter Property="Fill" TargetName="g1" Value="{DynamicResource DarkRedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g2" Value="{DynamicResource RedBlockBrush}" /> 
+                            <Setter Property="Visibility" TargetName="g2T" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Value" Value="3">
+                            <Setter Property="Fill" TargetName="g1" Value="{DynamicResource DarkRedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g2" Value="{DynamicResource RedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g3" Value="{DynamicResource BlueBlockBrush}" />
+                            <Setter Property="Visibility" TargetName="g3T" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Value" Value="4">
+                            <Setter Property="Fill" TargetName="g1" Value="{DynamicResource DarkRedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g2" Value="{DynamicResource RedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g3" Value="{DynamicResource BlueBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g4" Value="{DynamicResource GreenBlockBrush}" />
+                            <Setter Property="Visibility" TargetName="g4T" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Value" Value="5">
+                            <Setter Property="Fill" TargetName="g1" Value="{DynamicResource DarkRedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g2" Value="{DynamicResource RedBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g3" Value="{DynamicResource BlueBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g4" Value="{DynamicResource GreenBlockBrush}" />
+                            <Setter Property="Fill" TargetName="g5" Value="{DynamicResource LightGreenBlockBrush}" />
+                            <Setter Property="Visibility" TargetName="g5T" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

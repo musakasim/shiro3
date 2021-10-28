@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Shiro.View.BookmarkMiniView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:Shiro.ViewModel" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="100"> 
+    <Grid x:Name="LayoutRoot" d:DataContext="{d:DesignInstance Type=viewModel:BookmarkMiniViewModel, IsDesignTimeCreatable=True}">
+        <ListView ItemsSource="{Binding Path=DictionaryEntryBookmarkCollections.Value}"
+                  Style="{StaticResource TransparentListViewStyle}" 
+                  ItemContainerStyle="{DynamicResource TotallyTransparentListViewItemContainerStyle}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!--&#xE0B4;-->
+                    <!--<Button VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="5" Panel.ZIndex="100"  
+                            FontFamily="Segoe UI Symbol" Content="&#xE224;"
+                            Background="{Binding Path=Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}" BorderThickness="0"
+                            Command="{Binding Path=DataContext.BookmarkEntryCommand, ElementName=LayoutRoot}"
+                            CommandParameter="{Binding}">
+                    </Button>-->
+                    <ToggleButton Template="{DynamicResource StarToggleButtonStyle}" Panel.ZIndex="100" Margin="5" VerticalAlignment="Center"  HorizontalAlignment="Right" 
+                                  BorderBrush="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}"
+                                  Command="{Binding Path=DataContext.BookmarkEntryCommand, ElementName=LayoutRoot}"
+                                  CommandParameter="{Binding}" 
+                                  IsChecked="{Binding Path=IsBookmarked}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

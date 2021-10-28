@@ -1,0 +1,88 @@
+﻿<viewManagement:Pencere x:Class="Shiro.View.DictionaryView"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:viewModel="clr-namespace:Shiro.ViewModel"
+                          xmlns:view1="clr-namespace:Shiro.View"
+                          xmlns:viewManagement="clr-namespace:Shiro.View.ViewManagement"
+                          mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="500" x:Name="Pencere" >
+    <Grid d:DataContext="{d:DesignInstance Type=viewModel:DictionaryViewModel, IsDesignTimeCreatable=True}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="5,5,5,0">
+                <!--Search  TextBox and Search results -->
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                        <TextBox DockPanel.Dock="Left" FontSize="30" x:Name="SearchTextBox" IsVisibleChanged="ItemsFlowListBox_IsVisibleChanged"
+                                 Style="{StaticResource MetroBodySearchTextBoxStyle2}"
+                                 Text="{Binding Path=SearchTerm.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <!--<ComboBox ItemsSource="{Binding SearchLangModes}" SelectedValue="{Binding Path=SearchLangMode.Value}" />-->
+                    </DockPanel>
+                    <Border DockPanel.Dock="Top" Style="{StaticResource ShiroEntrySearchResultBorderStyle}"  >
+                        <!--ItemContainerStyle="{StaticResource ShiroEntrySearchResultListViewItemStyle}"-->
+                        <ListView Name="SearchResultsListView"
+                                  TextOptions.TextFormattingMode="Display"
+                                  ItemsSource="{Binding Path=SearchResults.Value}"
+                                  SelectedItem="{Binding Path=SelectedDictionaryEntry.Value}"
+                                  Style="{StaticResource MetroVerticalListViewStyle}"
+                                  ItemContainerStyle="{StaticResource ShiroEntrySearchResultListViewItemStyle}">
+                            <ListView.ItemTemplate >
+                                <!--ItemTemplate can be set directly for now:-->
+                                <StaticResource ResourceKey="ShiroEntryListingDataTemplate" />
+                                <!--This part will be uncommented when someone come up for a nice template for selected item-->
+                                <!--<DataTemplate >
+                                    <ContentControl Name="itemCc"  Content="{Binding}"  ContentTemplate="{StaticResource ShiroEntryListingDataTemplate1}" />
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=IsSelected, Mode=OneWay}"  Value="True">
+                                            <Setter TargetName="itemCc" Property="ContentTemplate" Value="{StaticResource ShiroEntryListingDataTemplate3}" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>-->
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
+                </DockPanel>
+            </Grid>
+            <GridSplitter Grid.Column="1" Grid.RowSpan="1" ResizeDirection="Columns" Width="5" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0" Background="Transparent" />
+            <Grid Grid.Column="2" Margin="1,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <view1:DictionaryEntryView Grid.Row="1"  DataContext="{Binding Path=SelectedItemViewModel}"
+                                        Visibility="{Binding Path=DictionaryEntry.Value, Converter={StaticResource NullToVisibilityConverter}}"/>
+            </Grid>
+            <GridSplitter Grid.Column="3" Grid.RowSpan="1" ResizeDirection="Columns" Width="5" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0" Background="Transparent"/>
+            <Grid Grid.Column="4" Visibility="{Binding Path=KanjiListViewModel.Kanjis.Value.Count, Converter={StaticResource EqualityToVisibilityConverter}, ConverterParameter=0, FallbackValue=Hidden}"
+                    Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!--<TextBlock Text="Kanji" Style="{DynamicResource MetroHeaderTextBlockStyle}"/>-->
+                <view1:KanjiListView Grid.Row="1" DataContext="{Binding Path=KanjiListViewModel}" x:Name="KanjiListViewE"  />
+            </Grid>
+        </Grid>
+        <DockPanel Grid.Row="1" Margin="5,0">
+            <Border DockPanel.Dock="Top">
+                <ListView ItemsSource="{Binding Path=SelectedDictionaryEntryHistory}"
+                          Style="{StaticResource MetroHorizontalListViewStyle}"
+                          SelectedItem="{Binding Path=SelectedDictionaryEntry.Value}"
+                          ItemTemplate="{StaticResource ShiroEntryListingDataTemplate4}"
+                          ItemContainerStyle="{StaticResource HistoryListBoxItemContainerStyle}"  >
+                </ListView>
+            </Border>
+        </DockPanel>
+    </Grid>
+</viewManagement:Pencere>

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:converter="clr-namespace:Shiro.Converter"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <converter:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
+    <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converter:NullToEnabilityConverter x:Key="NullToEnabilityConverter" />
+    <converter:EqualityToVisibilityConverter x:Key="EqualityToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+    <converter:ListToStringConverter x:Key="ListToStringConverter" />
+    <converter:ListToStringWithBracketsConverter x:Key="ListToStringWithBracketsConverter" />
+    <converter:ListToStringWithEnclosuresConverter x:Key="ListToStringWithEnclosuresConverter" />
+    <converter:UniversalValueConverter x:Key="ColorToBrushConverter" />
+    <converter:SolidColorBrushToColorValueConverter x:Key="SolidColorBrushToColorValueConverter" />
+</ResourceDictionary>

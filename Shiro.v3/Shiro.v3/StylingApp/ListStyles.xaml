@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!-- ShiroEntry search result list icin ListViewItem ContainerStyle -->
+    <Style x:Key="ShiroEntrySearchResultListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="Background" Value="{DynamicResource ShiroEntrySearchResultBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ShiroEntrySearchResultForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ShiroEntrySearchResultItemSeperationBrush}" />
+        <Setter Property="BorderThickness" Value="0 0 2 1" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border x:Name="ItemBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}" UseLayoutRounding="True">
+                        <ContentPresenter Cursor="Hand" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <!--remove right border for selected item to connect with main are which shows details of selected item-->
+                            <Setter TargetName="ItemBorder" Property="BorderThickness" Value="0 0 0 1" />
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ShiroEntrySearchResultSelectedBackGroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ShiroEntrySearchResultSelectedForegroundBrush}" />
+                        </Trigger>
+                        <!-- When mouse over on not selected item change background: -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ShiroEntrySearchResultHoverBackgroundBrush}" />
+                        </MultiTrigger>
+                        <!--gray out disabled item, i dont think there is a need for this case-->
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Listbox with items all looks like seperated boxes, tiled?-->
+    <Style x:Key="HistoryListBoxItemContainerStyle" TargetType="ListBoxItem" BasedOn="{StaticResource MetroTiledListBoxItemContainerStyle}">
+        <Setter Property="Background" Value="{DynamicResource HistoryListBoxItemBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource HistoryListBoxItemForegroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource HistoryListBoxSelectedItemBackgroundBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsSelected" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource HistoryListBoxHoverItemBackgroundBrush}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Listbox with items all looks like seperated boxes, tiled? -->
+    <Style x:Key="KanjiListBoxItemContainerStyle" TargetType="ListBoxItem" BasedOn="{StaticResource MetroTiledListBoxItemContainerStyle}">
+        <Setter Property="Background" Value="{DynamicResource KanjiListBoxItemBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource KanjiListBoxItemForegroundBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource KanjiListBoxSelectedItemBackgroundBrush}"></Setter>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsSelected" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource KanjiListBoxHoverItemBackgroundBrush}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="KanjiListBoxStyle" TargetType="ListBox" BasedOn="{StaticResource TransparentListBoxStyle}">
+        <!--We can play with properties or remake the whole style. see:-->
+        <!--<Setter Property="BorderBrush" Value="Chartreuse" />-->
+        <!--<Setter Property="BorderThickness" Value="5" />-->
+    </Style>
+
+    <Style x:Key="ExampleSentenseListViewStyle" TargetType="ListView" BasedOn="{StaticResource VerticalListViewStyle}">
+        <!--We can play with properties or remake the whole style. see:-->
+        <!--<Setter Property="BorderBrush" Value="Chartreuse" />-->
+        <!--<Setter Property="BorderThickness" Value="5" />-->
+    </Style>
+</ResourceDictionary>

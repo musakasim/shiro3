@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{13AA18F3-FA57-4A41-8A27-1D2074D66617}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shiro</RootNamespace>
+    <AssemblyName>Shiro.v3</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Finder.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mef, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.Mef.3.0.3\lib\net40\Autofac.Integration.Mef.dll</HintPath>
+    </Reference>
+    <Reference Include="FrInterfaces">
+      <HintPath>..\packages\FrInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="JapaneseResources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JapaneseResources.dll</HintPath>
+    </Reference>
+    <Reference Include="KirazControls">
+      <HintPath>..\packages\KirazControls.dll</HintPath>
+    </Reference>
+    <Reference Include="LibNMeCab">
+      <HintPath>..\packages\LibNMeCab.dll</HintPath>
+    </Reference>
+    <Reference Include="Nini">
+      <HintPath>..\packages\Trove.Nini.1.1.0.0\lib\net20\Nini.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="ReactiveProperty, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.4.0.0\lib\net46\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.NET46, Version=4.0.6582.30332, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.4.0.0\lib\net46\ReactiveProperty.NET46.dll</HintPath>
+    </Reference>
+    <Reference Include="StrokeOrderControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\StrokeOrderControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controller\BookmarkController.cs" />
+    <Compile Include="Controller\ShiroStaticDataRepository.cs" />
+    <Compile Include="Controller\WritingProgressController.cs" />
+    <Compile Include="Control\ModalContentPresenter.cs" />
+    <Compile Include="Converter\CombiningConverter.cs" />
+    <Compile Include="Converter\SolidColorBrushToColorValueConverter.cs" />
+    <Compile Include="Converter\UniversalValueConverter.cs" />
+    <Compile Include="Converter\RangeMapperConverter.cs" />
+    <Compile Include="Converter\MultiplierConverter.cs" />
+    <Compile Include="Converter\NullToEnabilityConverter.cs" />
+    <Compile Include="Converter\ValueInverterConverter.cs" />
+    <Compile Include="IoCContainer.cs" />
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\DbPopulator.cs" />
+    <Compile Include="Controller\KanjiInfoController.cs" />
+    <Compile Include="Controller\ShiroDictionaryController.cs" />
+    <Compile Include="Controller\ShiroRepository.cs" />
+    <Compile Include="Controller\TatoebaController.cs" />
+    <Compile Include="Converter\EqualityToValueConverter.cs" />
+    <Compile Include="Converter\ListToStringConverter.cs" />
+    <Compile Include="Converter\ListToVisibilityConverter.cs" />
+    <Compile Include="Converter\NullToVisibilityConverter.cs" />
+    <Compile Include="Converter\PathDataListToStrokeOrderGraphListConverter.cs" />
+    <Compile Include="Converter\TextTokenizeWithFuriganaConverter.cs" />
+    <Compile Include="Library\BindableResourceDict.cs" />
+    <Compile Include="Library\Collections\AsyncObservableCollection.cs" />
+    <Compile Include="Library\Collections\DistinctList.cs" />
+    <Compile Include="Library\Collections\DistinctObservableCollection.cs" />
+    <Compile Include="Library\Collections\RangeObservableCollection.cs" />
+    <Compile Include="Library\DeepCloning\DeepCloning.cs" />
+    <Compile Include="Library\DeepCloning\NonSerialiazableTypeSurrogateSelector.cs" />
+    <Compile Include="Library\Extensions\StringExtension.cs" />
+    <Compile Include="Library\Extensions\TaskExtensions.cs" />
+    <Compile Include="Library\Extensions\ResourceDictionaryExtensions.cs" />
+    <Compile Include="Library\ResourceDictionaryComparer.cs" />
+    <Compile Include="Library\Utils.cs" />
+    <Compile Include="Library\PrintingUtils.cs" />
+    <Compile Include="Library\TextBoxHelper.cs" />
+    <Compile Include="Library\FileHelper.cs" />
+    <Compile Include="Library\FuriganaView\MecabAnalyzer.cs" />
+    <Compile Include="Library\FuriganaView\MeCabData.cs" />
+    <Compile Include="Library\FuriganaView\JapaneseTextTokenizer.cs" />
+    <Compile Include="Library\IgnoreOrderComparer.cs" />
+    <Compile Include="Library\Kelebron.Utils\JapaneseKanaClassifier.cs" />
+    <Compile Include="Library\Kelebron.Utils\JapaneseKanaConverter.cs" />
+    <Compile Include="Library\Kelebron.Utils\JapaneseRomajiConverter.cs" />
+    <Compile Include="Library\LambdaHelpers.cs" />
+    <Compile Include="DesignTimeData.cs" />
+    <Compile Include="Library\ThemeManager.cs" />
+    <Compile Include="Model\Bookmark.cs" />
+    <Compile Include="Model\KanjiInfo.cs" />
+    <Compile Include="Model\KanjiGraph.cs" />
+    <Compile Include="Model\WritingProgress.cs" />
+    <Compile Include="Model\TatoebaSentence.cs" />
+    <Compile Include="Model\ShiroEntry.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="StylingApp\SearchResultStyleSelector.cs" />
+    <Compile Include="ViewModel\ResourceDictComparerViewModel.cs" />
+    <Compile Include="ViewModel\BookmarkManagerViewModel.cs" />
+    <Compile Include="ViewModel\BookmarkMiniViewModel.cs" />
+    <Compile Include="ViewModel\DbPopulatorViewModel.cs" />
+    <Compile Include="ViewModel\DictionaryEntryViewModel.cs" />
+    <Compile Include="ViewModel\DictionaryViewModel.cs" />
+    <Compile Include="ViewModel\KanjiListViewModel.cs" />
+    <Compile Include="ViewModel\KanjiViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ThemeManagementViewModel.cs" />
+    <Compile Include="ViewModel\WritingStudyViewModel.cs" />
+    <Compile Include="View\ResourceDictComparerView.xaml.cs">
+      <DependentUpon>ResourceDictComparerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookmarkManagerView.xaml.cs">
+      <DependentUpon>BookmarkManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookmarkMiniView.xaml.cs">
+      <DependentUpon>BookmarkMiniView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DbPopulatorView.xaml.cs">
+      <DependentUpon>DbPopulatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DictionaryEntryView.xaml.cs">
+      <DependentUpon>DictionaryEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DictionaryView.xaml.cs">
+      <DependentUpon>DictionaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IView.cs" />
+    <Compile Include="View\WritingStudyView.xaml.cs">
+      <DependentUpon>WritingStudyView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Library\Xaml\BindingErrorTraceListener.cs" />
+    <Compile Include="Library\Xaml\FocusAdvancement.cs" />
+    <Compile Include="Library\Xaml\MarginSetter.cs" />
+    <Compile Include="View\KanjiListView.xaml.cs">
+      <DependentUpon>KanjiListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KanjiView.xaml.cs">
+      <DependentUpon>KanjiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ThemeManagementView.xaml.cs">
+      <DependentUpon>ThemeManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewManagement\Pencere.cs" />
+    <Compile Include="View\ViewManagement\PencereManager.cs" />
+    <Compile Include="Library\Xaml\RichTextBoxHelper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="StylingApp\BorderStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\CustomControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\DataTemplate\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\DataTemplate\TatoebaSentenceDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\ListStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\ProgressBarStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\TextBoxLabelStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingApp\WindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingCommon\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\ComboBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\DataGridStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingApp\DataTemplate\ShiroEntryDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\ListStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\MetroListStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingCommon\MetroTextBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\MetroTextBlockStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingCommon\ProgressBarStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StylingCommon\ScrollBarStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StylingCommon\TextBoxLabelStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Finder.ico" />
+    <Resource Include="StylingApp\Image\Japanese-Tea-Ceremony-600x320.jpg" />
+    <Content Include="StylingCommon\Themes\Euphoria.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="StylingCommon\Themes\ShinyRed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="shiro.stngs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>shiro1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="StylingCommon\Themes\ExperimentalTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
+    <Page Include="View\ResourceDictComparerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BookmarkManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookmarkMiniView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DbPopulatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DictionaryEntryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DictionaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KanjiListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KanjiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ThemeManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WritingStudyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="StylingApp\Image\minus.png" />
+    <Resource Include="StylingCommon\Image\refresh_red.png" />
+    <Resource Include="StylingApp\Image\ikana.png" />
+    <Resource Include="StylingApp\Image\ikanji.png" />
+    <Resource Include="StylingApp\Image\data-management-icon.png" />
+    <Resource Include="StylingApp\Image\button-purple.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="StylingCommon\DataTemplate\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rd /s /q "$(TargetDir)\de"
+rd /s /q "$(TargetDir)\es"
+rd /s /q "$(TargetDir)\fr"
+rd /s /q "$(TargetDir)\it"
+rd /s /q "$(TargetDir)\ko"
+rd /s /q "$(TargetDir)\ru"
+rd /s /q "$(TargetDir)\zh-Hans"
+rd /s /q "$(TargetDir)\zh-Hant"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

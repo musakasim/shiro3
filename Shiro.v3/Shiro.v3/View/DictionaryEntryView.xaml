@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="Shiro.View.DictionaryEntryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel1="clr-namespace:Shiro.ViewModel"
+             xmlns:models="clr-namespace:Shiro.Model"
+             xmlns:view="clr-namespace:Shiro.View"
+             xmlns:interactivity="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.NET46"
+             mc:Ignorable="d" d:DesignWidth="400">
+    <UserControl.Resources>
+        <viewModel1:DictionaryEntryViewModel x:Key="DictionaryEntryViewModelProxy" />
+    </UserControl.Resources>
+    <Grid x:Name="Gridsss" d:DataContext="{d:DesignInstance Type=viewModel1:DictionaryEntryViewModel, IsDesignTimeCreatable=True}">
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="Auto" />-->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <view:BookmarkMiniView Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" DataContext="{Binding Path=BookmarkMiniViewModel}" Panel.ZIndex="100"/>
+        <!--<TextBlock Grid.Row="0" Text="{Binding Path=DictionaryEntry.Value.Id}" />-->
+        <!--by using FocusManager.IsFocusScope="True" i give this listbox it's own focus scope-->
+        <ListView Grid.Row="0" ItemsSource="{Binding Path=DictionaryEntry.Value.GroupedSpellingsTuple}"
+                  FocusManager.IsFocusScope="True"
+                  Style="{StaticResource TransparentListViewStyle}"
+                  ItemContainerStyle="{DynamicResource TotallyTransparentListViewItemContainerStyle}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBox Style="{DynamicResource DictionaryEntryHeaderTextBoxStyle}">
+                            <TextBox.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Item1" Converter="{StaticResource ListToStringConverter}" Mode="OneWay" />
+                                    <Binding Path="Item2" Converter="{StaticResource ListToStringWithBracketsConverter}" Mode="OneWay" />
+                                </MultiBinding>
+                            </TextBox.Text>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseMove">
+                                    <interactivity:EventToReactive ReactiveProperty="{Binding Path=MouseMoveOnTextBox, Source={StaticResource DictionaryEntryViewModelProxy}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--Meanings-->
+        <ListView Grid.Row="1" ItemsSource="{Binding Path=DictionaryEntry.Value.Meanings}"
+                  Style="{StaticResource VerticalListViewStyle}"
+                  ItemContainerStyle="{DynamicResource MetroListBoxItemContainerStyle}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:ShiroEntry+Meaning}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Style="{StaticResource MetroItemTitleTextBlockStyle}"
+                                   TextWrapping="Wrap"
+                                   Visibility="{Binding Path=PartOfSpeech, Converter={StaticResource ListToVisibilityConverter}}"
+                                   Text="{Binding Path=PartOfSpeech, Converter={StaticResource ListToStringConverter}, ConverterParameter=' | '}" />
+                        <Label Content="{Binding Path=Index, StringFormat={}{0}. }"
+                               Style="{StaticResource NumberListingLabelStyle}"
+                               Template="{StaticResource NumberListingLabelControlTemplate}"/>
+                        <TextBox DockPanel.Dock="Left" Style="{DynamicResource DictionaryMeaningTextBoxStyle}">
+                            <TextBox.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Gloss" Converter="{StaticResource ListToStringConverter}" ConverterParameter=", " />
+                                    <Binding Path="Misc" Converter="{StaticResource ListToStringWithEnclosuresConverter}"  ConverterParameter=", #( # )"/>
+                                </MultiBinding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--Examples -->
+        <Border Grid.Row="2"  Margin="0,20" BorderThickness="0,1,0,0" BorderBrush="LightGray"
+            Visibility="{Binding Path=ExampleSentences.Value.Count, Converter={StaticResource EqualityToVisibilityConverter}, ConverterParameter=0, FallbackValue=Collapsed}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Examples" Style="{DynamicResource MetroHeaderTextBlockStyle}"/>
+                <ListView Grid.Row="1"
+                  TextOptions.TextFormattingMode="Display"
+                  ItemsSource="{Binding Path=ExampleSentences.Value}"
+                  Style="{StaticResource VerticalListViewStyle}"
+                  ItemContainerStyle="{DynamicResource MetroListBoxItemContainerStyle}"
+                  ItemTemplate="{StaticResource TatoebaSentenceDataTemplate}">
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

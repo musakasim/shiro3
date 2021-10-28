@@ -1,0 +1,140 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Label styles-->
+    <Style TargetType="Label" x:Key="CoralLabelStyle">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border Background="Coral" CornerRadius="3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Height" Value="15" />
+    </Style>  
+
+    <!--TextBlock styles-->
+
+    <!--<Form View styling>-->
+    <!--(left side is field name and right side is field's value)-->
+    <Style x:Key="FormFieldNameTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource FormViewFieldNameForegroundBrush}" />
+        <Setter Property="FontFamily" Value="Verdana" />
+    </Style>
+    <Style x:Key="FormFieldValueTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource FormViewFieldValueForegroundBrush}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FontFamily" Value="Sitka Text" />
+    </Style>
+    <!--</Form View styling>-->
+
+    <Style x:Key="SmallTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontFamily" Value="Tempus Sans ITC"/>
+        <Setter Property="Opacity" Value="0.95"/>
+        <Setter Property="Padding" Value="2,2,0,2"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Thin"/>
+    </Style>
+
+    <Style x:Key="MediumBoldTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontFamily" Value="Tempus Sans ITC"/>
+        <Setter Property="Opacity" Value="0.95"/>
+        <Setter Property="Padding" Value="2,2,0,2"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontStyle" Value="Oblique"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="HeaderDemiBoldTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontFamily" Value="Showcard Gothic"/>
+        <Setter Property="Opacity" Value="0.88"/>
+        <Setter Property="Padding" Value="2,0,0,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"/>
+    </Style>
+
+    <Style x:Key="SectionHeaderTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe WP Semibold"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontWeight" Value="Heavy"/>
+        <Setter Property="Foreground" Value="{DynamicResource SectionHeaderForegroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SectionHeaderBackgroundBrush}"/>
+    </Style>
+
+    <Style x:Key="EditableOnFocusTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="Foreground" Value="DarkRed"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border x:Name="bg" Background="Transparent" BorderThickness="0" Padding="2" CornerRadius="0" Cursor="Pen">
+                            <!-- The implementation places the Content into the ScrollViewer. It must be named PART_ContentHost for the control to function -->
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" Style="{DynamicResource SimpleScrollViewer}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="bg"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="bg"/>
+                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Padding" TargetName="bg" Value="1"/>
+                            <Setter Property="Background" TargetName="bg" Value="#7381F9"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Padding" TargetName="bg" Value="1"/>
+                            <Setter Property="Cursor" TargetName="bg" Value="IBeam"/>
+                            <Setter Property="CornerRadius" TargetName="bg" Value="2"/>
+                            <Setter Property="BorderBrush" TargetName="bg" Value="DarkBlue"/>
+                            <Setter Property="BorderThickness" TargetName="bg" Value="1"/>
+                            <Setter Property="Background" TargetName="bg" Value="{DynamicResource BlueOverlay}"/>
+                            <Setter Property="Foreground" Value="DarkOrange"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+ 
+    <!-- Label like TextBox Simple/plain/Transparent-->
+    <Style x:Key="LabelLikeSimplestTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <!--<Border x:Name="bg" Background="{TemplateBinding Background}" BorderThickness="0" Padding="2" CornerRadius="5">-->
+                        <Border x:Name="bg" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" BorderThickness="0" Padding="2" CornerRadius="5">
+                            <!-- The implementation places the Content into the ScrollViewer. It must be named PART_ContentHost for the control to function -->
+                            <ScrollViewer  Margin="0" x:Name="PART_ContentHost" Style="{DynamicResource SimpleScrollViewer}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+ 
+    <!--Transparent TextBox with modified colors-->
+    <Style x:Key="LabelLikeTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource LabelLikeSimplestTextBoxStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelLikeTextBoxForeground}"/>
+        <Setter Property="SelectionBrush" Value="{DynamicResource LabelLikeTextBoxSelectionBrush}" />
+        <Setter Property="Background" Value="{DynamicResource LabelLikeTextBoxBackgroundBrush}" />
+    </Style>
+</ResourceDictionary>

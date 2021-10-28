@@ -1,0 +1,186 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Transparent -->
+    <!-- vertical and horizontal scrollbar -->
+    <!-- Border with 0 width -->
+    <!-- safe to use for controls that's items contains other focusable controls --> 
+    <Style x:Key="MetroListBoxItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="{DynamicResource MetroListViewItemBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MetroListViewItemForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ItemBorder" Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--selected item changes background and foreground colors-->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MetroListViewSelectedItemBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MetroListViewSelectedItemForegroundBrush}" />
+                        </Trigger>
+                        <!--It's hard to click item itself to select item when it has clickable/focusable controls in it, like textbox. Here when textbox is clicked i want to select list item too-->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                        <!--mouse hovered item changes background and foreground colors-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource MetroListViewHoverItemBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MetroListViewHoverItemForegroundBrush}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Provides Tiled like view for listbox-->
+    <!-- Border with 1px width -->
+    <Style x:Key="MetroTiledListBoxItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="{DynamicResource MetroListViewItemBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MetroListViewItemForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MetroListViewItemBorderBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ItemBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="1" Padding="5"
+                            Background="{TemplateBinding Background}" UseLayoutRounding="True" >
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--selected item changes background and foreground colors-->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MetroListViewSelectedItemBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MetroListViewSelectedItemForegroundBrush}" />
+                        </Trigger>
+                        <!--mouse hovered item changes background and foreground colors-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource MetroListViewHoverItemBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource MetroListViewHoverItemForegroundBrush}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Smooth content with vertical scroll bar, no horizontal scrollbar, horizontally overflowed data will be truncated -->
+    <!-- Also the vertical scrollviwer will be visible when mouse over listview -->
+    <!-- No Horizontal Scrollbar -->
+    <!-- Vertical Scrollbar -->
+    <!-- Transparent -->
+    <Style x:Key="MetroVerticalListViewStyle" TargetType="ListView">
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <ScrollViewer x:Name="FavsScrollViewer" Style="{DynamicResource FavsScrollViewer}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--Hide scrollbar when mouse is not over the control-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Smooth content with horizontal scroll bar, no vertical scrollbar, vertically overflowed data will be truncated -->
+    <!-- Also the horizontal scrollviwer will be visible when mouse over listview-->
+    <!-- Horizontal Scrollbar -->
+    <!-- No Vertical Scrollbar -->
+    <!-- Transparent -->
+    <Style x:Key="MetroHorizontalListViewStyle" TargetType="ListView" >
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <!--this one has no vertical scroll, but since StackPanel orientation is horizontal is it ok to delete next line???-->
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <ScrollViewer x:Name="FavsScrollViewer" Style="{DynamicResource FavsScrollViewer}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--By default ListView lists items vertically, so here we change the orientation to horizontal -->
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--Hide scrollbar when mouse is not over the control-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Listing is vertically and horizontally centered, orientation is horizontal  -->
+    <!-- Horizontal scrollviwer will be visible when mouse over listview-->
+    <!-- Horizontal Scrollbar -->
+    <!-- No Vertical Scrollbar -->
+    <!-- Transparent -->
+    <!-- Items are centered in both direction -->
+    <Style x:Key="MetroCenteredListViewStyle" TargetType="ListView" >
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <!--this one has no vertical scroll, but since StackPanel orientation is horizontal no need to this-->
+        <!--<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <ScrollViewer x:Name="FavsScrollViewer" Style="{DynamicResource FavsScrollViewer}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--By default ListView lists items vertically, so here we change the orientation to horizontal -->
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--Hide scrollbar when mouse is not over the control-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

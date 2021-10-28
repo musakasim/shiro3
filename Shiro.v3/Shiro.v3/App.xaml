@@ -1,0 +1,47 @@
+﻿<Application x:Class="Shiro.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ThemeDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="StylingCommon\Themes\Euphoria.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="CommonResources">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="StylingCommon\Brushes.xaml" />
+                        <ResourceDictionary Source="StylingCommon\Simple Styles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ComboBoxStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ListStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ScrollBarStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\TextBoxLabelStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ButtonStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ComboBoxStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\ProgressBarStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\MetroListStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\MetroTextBoxStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\MetroTextBlockStyles.xaml" />
+                        <ResourceDictionary Source="StylingCommon\DataTemplates.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="AppSpecificResources">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="StylingApp\WindowStyle.xaml" />
+                        <ResourceDictionary Source="StylingApp\BorderStyles.xaml" />
+                        <ResourceDictionary Source="StylingApp\ListStyles.xaml" /> 
+                        <ResourceDictionary Source="StylingApp\ButtonStyles.xaml" /> 
+                        <ResourceDictionary Source="StylingApp\TextBoxLabelStyles.xaml" />
+                        <ResourceDictionary Source="StylingApp\ProgressBarStyles.xaml" />
+                        <ResourceDictionary Source="StylingApp\CustomControlStyles.xaml" />
+                        <ResourceDictionary Source="StylingApp\DataTemplate\Converters.xaml" />
+                        <ResourceDictionary Source="StylingApp\DataTemplate\TatoebaSentenceDataTemplates.xaml" />
+                        <ResourceDictionary Source="StylingApp\DataTemplate\ShiroEntryDataTemplates.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

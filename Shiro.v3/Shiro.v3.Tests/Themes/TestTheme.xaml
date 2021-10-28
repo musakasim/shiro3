@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--<Image x:Key="WindowBackgroundImage"
+           Source="pack://application:,,,/StylingApp\Image\latest-blue-vintage-background-background-patterns-others.jpg"
+           Opacity="1" />
+    <VisualBrush x:Key="BgBrush" Visual="{StaticResource WindowBackgroundImage}" />-->
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--ShiroEntry SearchResults ListView Colors[ShiroEntryResourceDictionary]-->
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="ShiroEntrySearchResultForegroundBrush" Color="Crimson" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSpellingForegroundBrush" Color="Black" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultKanjiForegroundBrush" Color="LightSlateGray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultMeaningForegroundBrush" Color="DarkGray" />
+            <!--#1d1d1d-> metro black-->
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSelectedForegroundBrush" Color="#1d1d1d" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSelectedSpellingForegroundBrush" Color="LightSlateGray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSelectedKanjiForegroundBrush" Color="LightSlateGray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSelectedMeaningForegroundBrush" Color="Gray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultBorderBrush" Color="DimGray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultBackgroundBrush" Color="LightGray" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultItemSeperationBrush" Color="#eff4ff" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultHoverBackgroundBrush" Color="DarkSlateBlue" />
+            <SolidColorBrush x:Key="ShiroEntrySearchResultSelectedBackGroundBrush" Color="WhiteSmoke" />
+
+            <!--<LinearGradientBrush x:Key="FadingBackgroundOpacityMask" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="#FFFFFFFF" Offset="0" />
+            <GradientStop Color="#FFFFFFFF" Offset="0.8" />
+            <GradientStop Color="#00FFFFFF" Offset="1" />
+        </LinearGradientBrush>-->
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <SolidColorBrush x:Key="AppForegroundBrush" Color="Black" />
+    <SolidColorBrush x:Key="SidePanelBackgroundBrush" Color="LightBlue" Opacity="0.7"/>
+    <Color x:Key="DropShodowEffectColor">DarkGray</Color>
+    <!--ShiroEntry SearchResults ListView Colors-->
+
+    <!--SearchResults ListView Colors-->
+    <SolidColorBrush x:Key="ListViewItemBorderBrush" Color="Black" />
+    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="SkyBlue" />
+    <SolidColorBrush x:Key="ListViewSelectedItemBackGroundBrush" Color="DodgerBlue" />
+    <SolidColorBrush x:Key="ListViewHoverItemBackGroundBrush" Color="SteelBlue" />
+
+    <!--Text viewing ListView-->
+    <SolidColorBrush x:Key="TextListViewBackGroundBrush" Color="Khaki" />
+    <SolidColorBrush x:Key="TextListViewSelectedItemBackgroundBrush" Color="LightBlue" />
+    <SolidColorBrush x:Key="TextListViewHoverItemBackgroundBrush" Color="Azure" />
+
+    <SolidColorBrush x:Key="LabelLikeTextBoxForeground" Color="MidnightBlue" />
+    <SolidColorBrush x:Key="LabelLikeTextBoxSelectionBrush" Color="Goldenrod" />
+    <SolidColorBrush x:Key="LabelLikeTextBoxBackgroundBrush" Color="Transparent" />
+
+    <SolidColorBrush x:Key="SectionHeaderForegroundBrush" Color="DimGray" />
+    <SolidColorBrush x:Key="SectionHeaderBackgroundBrush" Color="Transparent" />
+
+    <SolidColorBrush x:Key="ListNumberBorderBrush" Color="BurlyWood" />
+
+    <!--ExampleSentences-->
+    <SolidColorBrush x:Key="EnglishSentenceForegroundBrush" Color="Black" />
+    <SolidColorBrush x:Key="EnglishSentenceSelectionBrush" Color="DarkTurquoise" />
+    <SolidColorBrush x:Key="EnglishSentenceBackgroundBrush" Color="DarkGray" />
+    <SolidColorBrush x:Key="FuriganaTextForegroundBrush" Color="Crimson" />
+    <SolidColorBrush x:Key="JapaneseSentenceForegroundBrush" Color="Black" />
+
+    <!--Search TextBox-->
+    <SolidColorBrush x:Key="SearchTextBoxForegroundBrush" Color="DarkRed" />
+    <SolidColorBrush x:Key="SearchTextBoxBackgroundBrush" Color="Gainsboro" />
+    <SolidColorBrush x:Key="SearchTextBoxBorderBrush" Color="Crimson" />
+    <!--On Focus-->
+    <SolidColorBrush x:Key="SearchTextBoxFocusedBackGroundBrush" Color="#FF78BCFD" />
+    <!--On Disabled-->
+    <SolidColorBrush x:Key="SearchTextBoxDisabledBackGroundBrush" Color="LightGray" />
+    <SolidColorBrush x:Key="SearchTextBoxDisabledBorderBrush" Color="LightGray" />
+    <SolidColorBrush x:Key="SearchTextBoxDisabledForegroundBrush" Color="LightGray" />
+    <!--Mouse Over-->
+    <SolidColorBrush x:Key="SearchTextBoxMouseOverForegroundBrush" Color="Black" />
+
+    <!--Form View Colors (left side is field name and right side is field's value)-->
+    <SolidColorBrush x:Key="FormViewFieldNameForegroundBrush" Color="DimGray" />
+    <SolidColorBrush x:Key="FormViewFieldValueForegroundBrush" Color="DarkSlateGray" />
+</ResourceDictionary>

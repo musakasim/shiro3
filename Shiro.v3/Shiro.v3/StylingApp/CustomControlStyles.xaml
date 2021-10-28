@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:wpfCustomControls="clr-namespace:Musa.WpfCustomControls;assembly=StrokeOrderControl">
+    <Style x:Key="DefaultStrokeOrderControlStyle" TargetType="wpfCustomControls:StrokeOrderControl">
+        <Setter Property="Background" Value="{DynamicResource StrokeOrderBackgroundBrush}" />
+        <Setter Property="StrokeBrush" Value="{DynamicResource StrokeOrderStrokeBrush}" />
+        <Setter Property="LastStrokeBrush" Value="{DynamicResource StrokeOrderLastStrokeBrush}" />
+        <Setter Property="FillBrush" Value="{DynamicResource StrokeOrderFillBrush}" />
+        <Setter Property="StrokeThickness" Value="{DynamicResource StrokeOrderStrokeThickness}" />
+    </Style>
+</ResourceDictionary>

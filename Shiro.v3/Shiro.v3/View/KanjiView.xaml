@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="Shiro.View.KanjiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:Shiro.ViewModel"
+             xmlns:converter="clr-namespace:Shiro.Converter"
+             xmlns:control="clr-namespace:Shiro.Control"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:wpfCustomControls="clr-namespace:Musa.WpfCustomControls;assembly=StrokeOrderControl"
+             xmlns:kirazControls="clr-namespace:KirazControls;assembly=KirazControls"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="310">
+    <UserControl.Resources>
+        <Style x:Key="CharacterContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="#FF3B0031" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ContentPresenter x:Name="ContentHost" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <converter:ValueInverterConverter x:Key="ValueInverterConverter" BaseValue="100" FallBackValue="0"/>
+        <converter:RangeMapperConverter x:Key="RangeMapperConverter" BaseMinValue="0" BaseMaxValue="2500" TargetMinValue="0" TargetMaxValue="100"/>
+        <converter:CombiningConverter x:Key="CombiningConverter" Converter1="{StaticResource RangeMapperConverter}" Converter2="{StaticResource ValueInverterConverter}"/>
+    </UserControl.Resources>
+    <Grid d:DataContext="{d:DesignInstance viewModel:KanjiViewModel, IsDesignTimeCreatable = True}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Kanji.Value.Kanji}" FontSize="76" Width="100"
+                   TextAlignment="Center" />
+        <!--Stroke Order, onclick shows animation-->
+        <wpfCustomControls:StrokeOrderControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="StrokeOrderCanvas" 
+                                              StrokeDataList="{Binding Path=Kanji.Value.KanjiGraph.PathDataList,Mode=OneWay}"
+                                              Zoom="0.5" Style="{StaticResource DefaultStrokeOrderControlStyle}"
+                                              >
+                                              <!--StrokeThickness ="3"
+                                              StrokeBrush="White" 
+                                              FillBrush="Red" 
+                                              LastStrokeBrush="Black"
+                                              Background="SteelBlue"-->
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:EventTrigger.Actions>
+                        <i:InvokeCommandAction Command="{Binding ShowAnimationCommand}"/>
+                    </i:EventTrigger.Actions>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </wpfCustomControls:StrokeOrderControl>
+
+        <!--Kanji Info-->
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Path=Kanji.Value}"
+                   Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Hidden}">
+            <DockPanel DockPanel.Dock="Top">
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=Meanings,Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Meaning" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=Meanings}" Style="{StaticResource MetroBigTextTextBlockStyle}" />
+                </Grid>
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=KunReadings,Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Kun Readings" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=KunReadings}" Style="{StaticResource MetroBigTextTextBlockStyle}" FontFamily="Meiryo UI"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=OnReadings,Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="On Readings" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=OnReadings}" Style="{StaticResource MetroBigTextTextBlockStyle}" FontFamily="Meiryo UI"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=NanoriReadings,Converter={StaticResource ListToVisibilityConverter}, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Nanori" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=NanoriReadings}" Style="{StaticResource MetroBigTextTextBlockStyle}" FontFamily="Meiryo UI"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Freq" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <ProgressBar Grid.Column="1" Margin="2" Value="{Binding Path=Frequency, Converter={StaticResource CombiningConverter}}" 
+                                 Style="{DynamicResource HardnessLevelProgressBarStyle}" Width="80" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="JLPT" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <ProgressBar Grid.Column="1" Value="{Binding Path=JlptLvl}"  Style="{DynamicResource JlptLvlProgressBarStyle}" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=SchoolGrade,Converter={StaticResource EqualityToVisibilityConverter},ConverterParameter=0, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grade" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=SchoolGrade}" Style="{StaticResource MetroBigTextTextBlockStyle}" />
+                </Grid>
+                <Grid DockPanel.Dock="Top" Visibility="{Binding Path=StrokeCount,Converter={StaticResource EqualityToVisibilityConverter},ConverterParameter=0, FallbackValue=Hidden}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Stroke Count" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=StrokeCount}" Style="{StaticResource MetroBigTextTextBlockStyle}" />
+
+                </Grid>
+            </DockPanel>
+        </DockPanel>
+
+
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding Path=KanjiCompounds.Value,Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Hidden}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Kanji Compounds" Style="{StaticResource MetroItemTitleSecondaryTextBlockStyle}" />
+            <ListView Grid.Row="1" ItemsSource="{Binding Path=KanjiCompounds.Value}"
+                      ItemTemplate="{DynamicResource ShiroEntryListingDataTemplate3}"
+                      Style="{DynamicResource HorizontallyWrappedListViewStyle}">
+                <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid Grid.Row="0" DataContext="{Binding Path=GroupedSpellingsTuple[0]}"
+                        Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Path=Item2[0]}"
+                           Style="{StaticResource MetroSubheaderTextBlockStyle}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Item1[0]}"
+                                           Style="{StaticResource FormFieldNameTextBlockStyle}" Margin="3,5"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>-->
+            </ListView>
+
+        </Grid>
+
+        <!--Kanji Drawing Animation Modal-->
+        <control:ModalContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  
+                                       x:Name="ModalPresenter" Margin="5" OverlayBrush="LightSlateGray" >
+            <control:ModalContentPresenter.ModalContent>
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.Resources>
+                        <Style TargetType="kirazControls:PathDrawingAnimationCanvas">
+                            <Setter Property="Tracker">
+                                <Setter.Value>
+                                    <Ellipse Width="5" Height="5" Fill="Crimson" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <kirazControls:PathDrawingAnimationCanvas x:Name="DrawingAnimationCanvas"  
+                                          PathDataList="{Binding Path=Kanji.Value.KanjiGraph.PathDataList, NotifyOnTargetUpdated=True}"
+                                          StartImmediately="True" StrokeThickness="5" DrawingBrush="Black" TrackerBrush="Crimson"
+                                          AnimationFollowingMethod="CompositionTargetRendering"
+                                          DrawingMethod="Lines" DurationRatio="0.4" 
+                                          Width="120" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button Content="Close" Command="{Binding Path=HideAnimationCommand}" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10,130,10,5"
+                            Style="{DynamicResource BlueButtonStyle}"/>
+                </Grid>
+            </control:ModalContentPresenter.ModalContent>
+        </control:ModalContentPresenter>
+    </Grid>
+</UserControl>

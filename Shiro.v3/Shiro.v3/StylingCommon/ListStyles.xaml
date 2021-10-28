@@ -1,0 +1,259 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="TransparentListViewStyle" TargetType="ListView">
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="TransparentListBoxStyle" TargetType="ListBox">
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="TransparentHorizontalListBoxStyle" TargetType="ListBox"
+           BasedOn="{StaticResource TransparentListBoxStyle}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Smooth and Wrapped content with vertical scroll bar, if item not fit one line horizantally overflowed data will be truncated-->
+    <!-- purpose of this style is showing small items in every line of listview and jump the next line when line is full-->
+    <!-- Transparent -->
+    <!-- No Horizontal ScrollBar -->
+    <Style x:Key="HorizontallyWrappedListViewStyle" TargetType="ListView">
+        <!--farkli template(ItemsPanel) olusturuldugu icin rendering cok yavas, cok fazla oge yuklenmemeli-->
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    </Style>
+
+    <!-- Smooth content with vertical scroll bar, no horizantal scrollbar, horizantally overflowed data will be truncated -->
+    <!-- Also the vertical scrollviwer will be visible when mouse over listview-->
+    <!-- Transparent -->
+    <!-- No Horizontal ScrollBar --> 
+    <Style x:Key="VerticalListViewStyle" TargetType="ListView">
+        <Setter Property="Border.BorderThickness" Value="0 0 0 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <!--farkli template olusturuldugu icin galiba render cok yavas, cok fazla oge yuklenmemeli-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <ScrollViewer x:Name="FavsScrollViewer" Style="{DynamicResource FavsScrollViewer}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundedListBoxItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ItemBorder" CornerRadius="10" BorderBrush="{DynamicResource ListViewItemBorderBrush}" BorderThickness="1" Margin="1"
+                            Background="{DynamicResource ListViewBackgroundBrush}" UseLayoutRounding="True">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background"
+                                    Value="{DynamicResource ListViewSelectedItemBackgroundBrush}" />
+                            <Setter Property="Effect" TargetName="ItemBorder">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0" Color="{DynamicResource DropShodowEffectColor}" Opacity="1" BlurRadius="5" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ListViewHoverItemBackgroundBrush}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--todo:look for: these ItemContainerStyles makes SelectedItem binding not usable-->
+    
+    <!--Transparent-->
+    <!--even selected items has no background-->
+    <Style x:Key="TotallyTransparentListViewItemContainerStyle" TargetType="ListViewItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border x:Name="ItemBorder">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--  when inner textboxes' content selected also select the list item -->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Transparent-->
+    <!--Rounded corners-->
+    <!--Hovered and selected items are not transparent, has background-->
+    <Style x:Key="TransparentListBoxItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ItemBorder" CornerRadius="2">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--On selection set backgorund-->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ListViewBackgroundBrush}" />
+                        </Trigger>
+                        <!--  when inner textboxes' content selected also select the list item -->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                        <!--OnHover set backgorund-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ListViewHoverItemBackgroundBrush}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Fun styles:-->
+    <Style x:Key="BlueListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="#FFB0D3F0" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" />
+        <Setter Property="Opacity" Value="0.88" />
+        <Setter Property="Padding" Value="2,0,0,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="Showcard Gothic" />
+        <Setter Property="FontSize" Value="14.667" />
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}" UseLayoutRounding="True">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" TargetName="Bd" Value="DodgerBlue" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true" />
+                                <Condition Property="Selector.IsSelectionActive" Value="false" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="DodgerBlue" />
+                            <Setter Property="Foreground" Value="DarkSlateGray" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="AimpLikeItemContainerStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="#313131" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ItemBorder" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                            UseLayoutRounding="True">
+                        <ContentPresenter Cursor="Hand" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" TargetName="ItemBorder" Value="Chocolate" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true" />
+                                <Condition Property="Selector.IsSelectionActive" Value="false" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="ItemBorder" Value="Sienna" />
+                            <Setter Property="Foreground" Value="CornflowerBlue" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="Sienna" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

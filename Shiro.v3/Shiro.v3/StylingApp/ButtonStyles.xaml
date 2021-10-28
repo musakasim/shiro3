@@ -1,0 +1,120 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <ControlTemplate x:Key="StarToggleButtonStyle"  TargetType="ToggleButton">
+        <ControlTemplate.Resources>
+            <Style x:Key="ZoomOnMouseOverStyle" TargetType="TextBlock">
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1.5" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                <DoubleAnimation To="1.5" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1.0" Duration="0:0:0.1" Storyboard.TargetProperty="RenderTransform.ScaleX" />
+                                <DoubleAnimation To="1.0" Duration="0:0:0.1" Storyboard.TargetProperty="RenderTransform.ScaleY" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </ControlTemplate.Resources>
+        <Grid>
+            <TextBlock x:Name="starPath" FontFamily="Segoe UI Symbol" Text="&#xE224;" Foreground="{TemplateBinding BorderBrush}"
+                       Style="{StaticResource ZoomOnMouseOverStyle}"/>
+            <Viewbox>
+                <ContentPresenter  />
+            </Viewbox>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger  Property="IsChecked" Value="True">
+                <!--Filled Star-->
+                <Setter TargetName="starPath" Property="Text" Value="&#xE0B4;" />
+                <Setter Property="ToolTip" Value="Click To Remove Bookmark"/>
+            </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="False" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <!--Filled Star-->
+                <Setter TargetName="starPath" Property="Text" Value="&#xE0B4;" />
+                <Setter Property="ToolTip" Value="Click To Bookmark This"/>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <!--Empty Star-->
+                <Setter TargetName="starPath" Property="Text" Value="&#xE224;" />
+                <Setter Property="ToolTip" Value="Click To Remove Bookmark"/>
+            </MultiDataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--almost same style with StarToggleButtonStyle, by using path data(path data should be replaced with a nice star)-->
+    <ControlTemplate x:Key="StarToggleButtonStyle2"  TargetType="ToggleButton">
+        <Grid>
+            <Path x:Name="starPath" Data="M 270.000 276.000
+                                          L 271.176 271.618
+                                          L 275.706 271.854
+                                          L 271.902 269.382
+                                          L 273.527 265.146
+                                          L 270.000 268.000
+                                          L 266.473 265.146
+                                          L 268.098 269.382
+                                          L 264.294 271.854
+                                          L 268.824 271.618
+                                          L 270.000 276.000" 
+                  Stroke="{TemplateBinding BorderBrush}"
+                  Fill="Transparent"  
+                  StrokeThickness="1" Stretch="Uniform">
+            </Path>
+            <Viewbox>
+                <ContentPresenter />
+            </Viewbox>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger  Property="IsChecked" Value="True">
+                <!--Filled Star-->
+                <Setter TargetName="starPath" Property="Fill" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                <Setter Property="ToolTip" Value="Click To Remove Bookmark"/>
+            </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <!--Filled Star-->
+                <Setter TargetName="starPath" Property="Fill" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                <Setter Property="ToolTip" Value="Click To Bookmark This"/>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="True" />
+                    <Condition Binding = "{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <!--Empty Star-->
+                <Setter TargetName="starPath" Property="Fill" Value="Transparent" />
+                <Setter Property="ToolTip" Value="Click To Remove Bookmark"/>
+            </MultiDataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

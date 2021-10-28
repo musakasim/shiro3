@@ -1,0 +1,7 @@
+<Nini>
+  <Section Name="ThemeSettings">
+    <Key Name="ThemeDirectory" Value="StylingCommon\Themes" />
+    <Key Name="funnyThemeUri" Value="ShinyRed.xaml" />
+    <Key Name="defaultThemeUri" Value="Euphoria.xaml" />
+  </Section>
+</Nini>
