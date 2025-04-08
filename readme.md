@@ -4,7 +4,8 @@ v0.1 is still not a ready app.  on slow progress.
 
 You can get and try latest version in download section
 
-![20140306 shiro 1.png](https://bitbucket.org/repo/G8oaKG/images/2921343148-20140306%20shiro%201.png)
+![image](https://github.com/user-attachments/assets/dd92e89c-7bbf-46e6-96a4-eea4f0b331ea)
+
 
 
 **Files needed to populate db are listed below.**
